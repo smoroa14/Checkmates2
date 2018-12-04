@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pojos.Player;
 
-
 /**
  *
  * @author micha
@@ -60,7 +59,7 @@ public class DB_Access {
                         return false;
                     }
                 }
-                Player user = new Player(username, getHashOfString(password1), 1000L, null);
+                Player user = new Player(username, getHashOfString(password1), 1000L, new String[]{"Turm", "Springer", "Läufer", "Dame", "König", "Läufer", "Springer", "Turm"});
                 em.getTransaction().begin();
                 em.persist(user);
                 em.getTransaction().commit();
@@ -90,13 +89,14 @@ public class DB_Access {
         updateDeck.setParameter("deck", deck);
         updateDeck.setParameter("username", username);
         updateDeck.executeUpdate();
+        em.getTransaction().commit();
     }
     
     public String[] loadDeck(String username){
         Query getDeckofUser = em.createNamedQuery("Player.findDeck");
         getDeckofUser.setParameter("username", username);
-        List<String> deck = getDeckofUser.getResultList();
-        return  (String[]) deck.toArray();
+        List<String[]> deck = getDeckofUser.getResultList();
+        return deck.get(0);
     }
     
     private int getHashOfString(String str) {
