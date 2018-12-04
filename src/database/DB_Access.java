@@ -88,6 +88,7 @@ public class DB_Access {
         Query updateDeck = em.createNamedQuery("Player.updateDeck");
         updateDeck.setParameter("deck", deck);
         updateDeck.setParameter("username", username);
+        em.getTransaction().begin();
         updateDeck.executeUpdate();
         em.getTransaction().commit();
     }
@@ -96,6 +97,9 @@ public class DB_Access {
         Query getDeckofUser = em.createNamedQuery("Player.findDeck");
         getDeckofUser.setParameter("username", username);
         List<String[]> deck = getDeckofUser.getResultList();
+        for (String[] strings : deck) {
+            System.out.println(strings[0]);
+        }
         return deck.get(0);
     }
     

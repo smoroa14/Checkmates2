@@ -295,7 +295,6 @@ public class MenuGUI extends javax.swing.JFrame {
         DeckGUI deckgui = new DeckGUI();
         deckgui.setP(u);
         deckgui.setVisible(true);
-      
     }//GEN-LAST:event_onDeck
 
     /**
