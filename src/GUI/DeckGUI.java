@@ -10,16 +10,9 @@ import database.DB_Access;
 import javax.swing.JComboBox;
 import pojos.Player;
 
-/**
- *
- * @author kevin
- */
+
 public class DeckGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DeckGUI
-     *
-     */
     private Player p;
     String[] deck = new String[8];
 
