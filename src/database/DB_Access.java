@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pojos.Player;
 
+
 /**
  *
  * @author micha
