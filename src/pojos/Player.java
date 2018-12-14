@@ -24,8 +24,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p")
    ,@NamedQuery(name = "Player.getPlayer", query = "SELECT p FROM Player p WHERE p.username = :username AND p.password = :password")
-   ,@NamedQuery(name = "Player.updateDeck", query = "UPDATE Player SET deck = :deck WHERE username = :username")
-   ,@NamedQuery(name = "Player.findDeck", query = "SELECT deck FROM Player p WHERE p.username = :username")
+   ,@NamedQuery(name = "Player.updateDeck", query = "UPDATE Player p SET p.deck = :deck WHERE p.username = :username")
+   ,@NamedQuery(name = "Player.findDeck", query = "SELECT p.deck FROM Player p WHERE p.username = :username")
 })
 public class Player implements Serializable{
 

@@ -310,7 +310,7 @@ public class MenuGUI extends javax.swing.JFrame {
         DeckGUI deckgui = new DeckGUI();
         deckgui.setP(u);
         deckgui.setVisible(true);
-
+        this.dispose();
     }//GEN-LAST:event_onDeck
 
     /**
