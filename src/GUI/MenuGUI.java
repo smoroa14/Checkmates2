@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Server.Client_Connection;
+import Server.Server_Connection;
 import beans.Raum;
 import java.util.LinkedList;
 import threads.SoundPlayer;
@@ -12,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import pojos.Player;
 
 /**
@@ -20,36 +21,36 @@ import pojos.Player;
  * @author Kevin
  */
 public class MenuGUI extends javax.swing.JFrame {
-
+    
     private SoundPlayer player = SoundPlayer.getInstance();
     private Player u;
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
     LinkedList<Raum> raumlist = new LinkedList<>();
     boolean used = false;
     Raum selectedroom;
+    private Client_Connection client_conn;
 
     //private DB_Access access = DB_Access.getInstance();
     public Player getS() {
         return u;
     }
-
+    
     public void setS(Player u) {
         this.u = u;
         lbName.setText("Name: " + u.getUsername());
         lbGeld.setText("Elo: " + u.getMmr());
     }
     
-    public void dohier(String name)
-    {
+    public void dohier(String name) {
         lbName.setText(name);
     }
-
+    
     public MenuGUI() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         initComponents();
         liRaum.setModel(dlm);
-
+        
     }
 
     /**
@@ -244,20 +245,23 @@ public class MenuGUI extends javax.swing.JFrame {
         try {
             String raumname = tfName.getText();
             String raumpasswort = tfPasswort.getText();
-            int raumelo = Integer.parseInt(tfElo.getText());
-            Raum raum = new Raum(raumname, raumpasswort, raumelo);
-
-            for (Raum raum1 : raumlist) {
-                if (raum.getName().equals(raum1.getName())) {
-                    used = true;
-                }
-            }
-            if (used == false) {
-                raumlist.add(raum);
-                dlm.addElement(raum);
-            }
-            used = false;
-
+            
+            Server_Connection server = new Server_Connection(raumpasswort);
+            
+//            int raumelo = Integer.parseInt(tfElo.getText());
+//            Raum raum = new Raum(raumname, raumpasswort, raumelo);
+//            
+//            for (Raum raum1 : raumlist) {
+//                if (raum.getName().equals(raum1.getName())) {
+//                    used = true;
+//                }
+//            }
+//            if (used == false) {
+//                raumlist.add(raum);
+//                dlm.addElement(raum);
+//            }
+//            used = false;
+            
         } catch (NumberFormatException e) {
             System.out.println("ein Feld ist leer");
         }
@@ -265,20 +269,31 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onErstellen
 
     private void onBeitreten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onBeitreten
-        String eingabe = "";
-        try {
-            if (!selectedroom.getPasswort().equals("")) {
-                eingabe = JOptionPane.showInputDialog("Raum-Passwort benötigt:");
-            } else {
-                if (eingabe.equals(selectedroom.getPasswort())) {
-                    Main2 maingui = new Main2();
-                    maingui.setVisible(true);
-                    this.dispose();
-                }
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Es ist kein Raum ausgewählt!");
+//        String eingabe = "";
+//        try {
+//            if (!selectedroom.getPasswort().equals("")) {
+//                eingabe = JOptionPane.showInputDialog("Raum-Passwort benötigt:");
+//            } else {
+//                if (eingabe.equals(selectedroom.getPasswort())) {
+//                    Main2 maingui = new Main2();
+//                    maingui.setVisible(true);
+//                    this.dispose();
+//                }
+//            }
+//        } catch (NullPointerException e) {
+//            System.out.println("Es ist kein Raum ausgewählt!");
+//        }
+        JoinDlg dlg = new JoinDlg(this, true);
+        dlg.setVisible(true);
+        
+        if (dlg.getIp() != null) {
+            client_conn = new Client_Connection(dlg.getIp());
+            
+            client_conn.sendCommand("++--++_password_" + dlg.getPw());
+            String s = client_conn.waitForCommand();
+            System.out.println("Server sended: " + s);
         }
+        
 
     }//GEN-LAST:event_onBeitreten
 
@@ -295,7 +310,7 @@ public class MenuGUI extends javax.swing.JFrame {
         DeckGUI deckgui = new DeckGUI();
         deckgui.setP(u);
         deckgui.setVisible(true);
-      
+
     }//GEN-LAST:event_onDeck
 
     /**

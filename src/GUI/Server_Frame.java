@@ -6,12 +6,12 @@
 package GUI;
 
 import Server.ChessServer;
+import Server.Client_Frame;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -95,14 +95,18 @@ public class Server_Frame extends javax.swing.JFrame {
             stopped = false;
             started = true;
 
-            menGUI = new MenuGUI();
-            menGUI.dohier("Nico Morningstar");
-            menGUI1 = new MenuGUI();
-            menGUI1.dohier("Michi der Idiot");
-            menGUI.setDefaultCloseOperation(HIDE_ON_CLOSE);
-            menGUI1.setDefaultCloseOperation(HIDE_ON_CLOSE);
-            menGUI.setVisible(true);
-            menGUI1.setVisible(true);
+//            menGUI = new MenuGUI();
+//            menGUI.dohier("Nico Morningstar");
+//            menGUI1 = new MenuGUI();
+//            menGUI1.dohier("Michi der Idiot");
+//            menGUI.setDefaultCloseOperation(HIDE_ON_CLOSE);
+//            menGUI1.setDefaultCloseOperation(HIDE_ON_CLOSE);
+//            menGUI.setVisible(true);
+//            menGUI1.setVisible(true);
+
+            Client_Frame cl1 = new Client_Frame();
+            Client_Frame cl2 = new Client_Frame();
+            
         }
     }//GEN-LAST:event_btStartActionPerformed
 
