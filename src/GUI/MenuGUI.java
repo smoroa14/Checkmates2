@@ -8,12 +8,14 @@ package GUI;
 import Server.Client_Connection;
 import Server.Server_Connection;
 import beans.Raum;
+import game.GUI.starter;
 import java.util.LinkedList;
 import threads.SoundPlayer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import pojos.Player;
 
 /**
@@ -245,8 +247,9 @@ public class MenuGUI extends javax.swing.JFrame {
         try {
             String raumname = tfName.getText();
             String raumpasswort = tfPasswort.getText();
+            starter.startGame("server", "localhost");
             
-            Server_Connection server = new Server_Connection(raumpasswort);
+            //Server_Connection server = new Server_Connection(raumpasswort);
             
 //            int raumelo = Integer.parseInt(tfElo.getText());
 //            Raum raum = new Raum(raumname, raumpasswort, raumelo);
@@ -287,11 +290,13 @@ public class MenuGUI extends javax.swing.JFrame {
         dlg.setVisible(true);
         
         if (dlg.getIp() != null) {
+            starter.startGame("client", dlg.getIp());
+            /*
             client_conn = new Client_Connection(dlg.getIp());
             
             client_conn.sendCommand("++--++_password_" + dlg.getPw());
             String s = client_conn.waitForCommand();
-            System.out.println("Server sended: " + s);
+            System.out.println("Server sended: " + s);*/
         }
         
 
