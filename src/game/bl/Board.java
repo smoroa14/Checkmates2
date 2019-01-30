@@ -19,6 +19,20 @@ public class Board extends JPanel {
         boardInit();
     }
 
+    public void changeColor() {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                if ((x + y) % 2 == 0) {
+                    this.chessBoard[x][y].setBackground(Color.white);
+                    this.chessBoard[x][y].setOrigColor(Color.white);
+                } else {
+                    this.chessBoard[x][y].setBackground(Color.black);
+                    this.chessBoard[x][y].setOrigColor(Color.black);
+                }
+            }
+        }
+    }
+
     public void boardInit() {
         removeAll();
         for (int y = 0; y < 8; y++) {
@@ -32,7 +46,6 @@ public class Board extends JPanel {
                     this.chessBoard[x][y].setBackground(Color.black);
                     this.chessBoard[x][y].setOrigColor(Color.black);
                 }
-
                 Piece p = null;
                 String color = null;
 

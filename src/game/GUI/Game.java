@@ -15,6 +15,7 @@ public class Game {
     public Game() {
         model = new Model();
         view = new View(model.getBoard(), this, "null");
+        model.getBoard().changeColor();
         setController(new Controller(model, view, this));
     }
 

@@ -5,6 +5,7 @@ import game.bl.Connectable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class Server extends Connectable {
     public void runGame() {
         try {
             serverSocket = new ServerSocket(2004, 10);
-            JOptionPane.showMessageDialog(null, "Deine ip ist: " + serverSocket.getInetAddress().getHostAddress());
+            JOptionPane.showMessageDialog(null, "Deine ip ist: " + InetAddress.getLocalHost().getHostAddress());
             
             System.out.println("Waiting for connection");
             connection = serverSocket.accept();

@@ -32,7 +32,6 @@ public class LoginGUI extends javax.swing.JFrame {
         initComponents();
         paRegister.setVisible(false);
         paLogin.setVisible(false);
-
     }
 
     /**

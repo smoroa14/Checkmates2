@@ -4,6 +4,8 @@ import game.bl.Board;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +14,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 
 public class View extends JFrame {
 
@@ -24,12 +31,12 @@ public class View extends JFrame {
     private JPanel turnBox;
     private JPanel boardPanel;
     private JPanel sideBox;
-    
+
     private JLabel turnTitle;
     private JLabel turn;
     private JLabel sideTitle;
     private JLabel sideText;
-    
+
     private JMenuBar menuBar;
     private JMenu gameOptions;
     private JMenuItem restart;
@@ -46,9 +53,10 @@ public class View extends JFrame {
     }
 
     public void createAndShowGUI() {
+        
         createPanels();
         createMenu();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setResizable(false);
         this.setSize(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(528, 446))))))))))))))));
@@ -127,7 +135,7 @@ public class View extends JFrame {
         exit.addActionListener(a);
         exit.setActionCommand("exit");
     }
-    
+
     public boolean promptRestart() {
         return JOptionPane.showConfirmDialog(this, "Möchten Sie das Spiel erneut starten?", "Restart", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }

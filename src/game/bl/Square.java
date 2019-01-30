@@ -4,9 +4,13 @@ package game.bl;
 import game.beans.Piece;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import javax.swing.ImageIcon;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 
 public class Square extends JButton {
@@ -71,4 +75,18 @@ public class Square extends JButton {
 		this.origColor = origColor;
 	}
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g); //To change body of generated methods, choose Tools | Templates.
+        
+        Color c = new Color(origColor.getRed(), origColor.getGreen(), origColor.getBlue(), 50);
+        g.setColor(c);
+        
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+    }
+
+    
+
+        
+        
 }	

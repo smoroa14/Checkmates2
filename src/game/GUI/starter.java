@@ -35,8 +35,8 @@ public class starter {
     }
 
     public static void main(String[] args) {
-        starter s = new starter();
-        s.startGame("server", "localhost");
-        s.startGame("client", "localhost");
+        //starter s = new starter();
+        starter.startGame("server", "localhost");
+        starter.startGame("client", "localhost");
     }
 }
