@@ -290,6 +290,7 @@ public class MenuGUI extends javax.swing.JFrame {
         dlg.setVisible(true);
         
         if (dlg.getIp() != null) {
+            System.out.println("ip: " + dlg.getIp());
             starter.startGame("client", dlg.getIp());
             /*
             client_conn = new Client_Connection(dlg.getIp());

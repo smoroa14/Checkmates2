@@ -20,7 +20,7 @@ public class Client extends Connectable {
     public void runGame(String ip) {
         try {
             socket = new Socket(ip, 2004);
-            System.out.println("Connected to localhost in port 2004");
+            System.out.println("Connected to " + ip + " in port 2004");
             out = new ObjectOutputStream(socket.getOutputStream());
             out.flush();
             in = new ObjectInputStream(socket.getInputStream());

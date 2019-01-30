@@ -25,7 +25,6 @@ public class Board extends JPanel {
             for (int x = 0; x < 8; x++) {
 
                 this.chessBoard[x][y] = new Square(this, new Point(x, y));
-
                 if ((x + y) % 2 == 0) {
                     this.chessBoard[x][y].setBackground(Color.white);
                     this.chessBoard[x][y].setOrigColor(Color.white);
