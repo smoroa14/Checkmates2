@@ -5,11 +5,9 @@
  */
 package GUI;
 
-import Server.Client_Connection;
 import beans.Raum;
 import game.GUI.starter;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.LinkedList;
 import threads.SoundPlayer;
 import java.util.logging.Level;

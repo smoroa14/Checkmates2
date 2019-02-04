@@ -2,7 +2,6 @@ package game.GUI;
 
 import GUI.LoginGUI;
 import GUI.MenuGUI;
-import game.beans.Command;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Board;
@@ -61,7 +60,6 @@ public class View extends JFrame {
         this.setPreferredSize(new Dimension(950, 560));
         this.pack();
 
-        
         changeCurColor("white");
     }
 

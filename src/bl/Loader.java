@@ -1,10 +1,7 @@
 package bl;
 
-import beans.figur.Figur;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,8 +20,8 @@ public class Loader {
 
   private static String src;
   private static Map<String, ImageIcon> imageIconMap = new TreeMap<>();
-  public static List<Figur> friendFigures = new LinkedList<>();
-  public static List<Figur> enemyFigures = new LinkedList<>();
+//  public static List<Figur> friendFigures = new LinkedList<>();
+//  public static List<Figur> enemyFigures = new LinkedList<>();
 
   public static void loadConfig() {
     try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator + "config.config"))) {
@@ -75,35 +72,35 @@ public class Loader {
   }
 
   public static void loadSpielfeld() {
-    List<Figur> curList = enemyFigures;
-    String filename = System.getProperty("user.dir") + src + "res" + File.separator + "spielfeld.txt";
-    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-      for (int i = 0; br.ready() && i < 8; i++) {
-        String line = br.readLine();
-        boolean yours = true;
-        if (i <= 1) {
-          curList = enemyFigures;
-          yours = false;
-        } else if (i >= 6) {
-          curList = friendFigures;
-          yours = true;
-        }
-
-        String[] parts = line.split(";");
-        if (parts.length >= 8) {
-          for (int x = 1; x <= 8; x++) {
-            Figur a = Figur.getClassFromChar(parts[x - 1].charAt(0), x, i + 1, yours);
-            if (a == null) {
-              continue;
-            }
-            curList.add(a);
-          }
-        }
-
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    List<Figur> curList = enemyFigures;
+//    String filename = System.getProperty("user.dir") + src + "res" + File.separator + "spielfeld.txt";
+//    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+//      for (int i = 0; br.ready() && i < 8; i++) {
+//        String line = br.readLine();
+//        boolean yours = true;
+//        if (i <= 1) {
+//          curList = enemyFigures;
+//          yours = false;
+//        } else if (i >= 6) {
+//          curList = friendFigures;
+//          yours = true;
+//        }
+//
+//        String[] parts = line.split(";");
+//        if (parts.length >= 8) {
+//          for (int x = 1; x <= 8; x++) {
+//            Figur a = Figur.getClassFromChar(parts[x - 1].charAt(0), x, i + 1, yours);
+//            if (a == null) {
+//              continue;
+//            }
+//            curList.add(a);
+//          }
+//        }
+//
+//      }
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
   }
 
   public static String getSoundPath(String file) {
