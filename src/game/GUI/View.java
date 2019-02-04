@@ -3,10 +3,8 @@ package game.GUI;
 import game.bl.Board;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -14,11 +12,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.LookAndFeel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class View extends JFrame {
 
@@ -30,7 +25,10 @@ public class View extends JFrame {
     private JPanel infoBox;
     private JPanel turnBox;
     private JPanel boardPanel;
-    private JPanel sideBox;
+    private JPanel chatBox;
+
+    private JScrollPane chatPane;
+    private JTextArea chatArea;
 
     private JLabel turnTitle;
     private JLabel turn;
@@ -53,7 +51,7 @@ public class View extends JFrame {
     }
 
     public void createAndShowGUI() {
-        
+
         createPanels();
         createMenu();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -87,20 +85,29 @@ public class View extends JFrame {
         infoBox = new JPanel();
         infoBox.setLayout(new BorderLayout());
 
-        turnBox = new JPanel();
+        turnBox = new JPanel(new GridLayout(2, 1));
+        JPanel pan = new JPanel(new GridLayout(2, 1));
         turnTitle = new JLabel("Current Turn: ");
         turn = new JLabel("" + getCurrTurn());
-        turnBox.add(turnTitle);
-        turnBox.add(turn);
+        pan.add(turnTitle);
+        pan.add(turn);
+        turnBox.add(pan);
 
-        sideBox = new JPanel();
+        JPanel pan2 = new JPanel();
         sideTitle = new JLabel("Your side is: ");
         sideText = new JLabel("" + getSide());
-        sideBox.add(sideTitle);
-        sideBox.add(sideText);
+        pan2.add(sideTitle);
+        pan2.add(sideText);
+        turnBox.add(pan2);
+
+        chatBox = new JPanel();
+        chatArea = new JTextArea();
+        chatPane = new JScrollPane(chatArea);
+        chatBox.add(chatPane);
 
         infoBox.add(turnBox, BorderLayout.NORTH);
-        infoBox.add(sideBox, BorderLayout.CENTER);
+        //infoBox.add(sideBox, BorderLayout.CENTER);
+        infoBox.add(chatBox, BorderLayout.CENTER);
 
         mainPanel.add(boardPanel, BorderLayout.CENTER);
         mainPanel.add(infoBox, BorderLayout.EAST);
