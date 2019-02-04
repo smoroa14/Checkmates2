@@ -1,11 +1,13 @@
 package game.GUI;
 
+import GUI.LoginGUI;
 import GUI.MenuGUI;
 import game.beans.Command;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Board;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -55,9 +57,12 @@ public class View extends JFrame {
         setSide(color);
         createAndShowGUI();
         setGame(game);
-        this.setSize(800, 600);
         this.setTitle(MenuGUI.u.getUsername());
+        this.setPreferredSize(new Dimension(950, 560));
+        this.pack();
 
+        
+        changeCurColor("white");
     }
 
     public void createAndShowGUI() {
@@ -65,14 +70,13 @@ public class View extends JFrame {
         createPanels();
         createMenu();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.pack();
         this.setResizable(false);
         this.setSize(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(528, 446))))))))))))))));
         this.setVisible(true);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e); //To change body of generated methods, choose Tools | Templates.
+                super.windowClosing(e);
                 closeWindow();
             }
         });
@@ -140,8 +144,13 @@ public class View extends JFrame {
         infoBox.add(turnBox, BorderLayout.NORTH);
         infoBox.add(chatBox, BorderLayout.CENTER);
 
-        mainPanel.add(boardPanel, BorderLayout.CENTER);
-        mainPanel.add(infoBox, BorderLayout.EAST);
+        boardPanel.setPreferredSize(new Dimension(500, 500));
+        boardPanel.setMaximumSize(new Dimension(500, 500));
+        boardPanel.setMinimumSize(new Dimension(500, 500));
+        boardPanel.setSize(new Dimension(500, 500));
+
+        mainPanel.add(boardPanel, BorderLayout.WEST);
+        mainPanel.add(infoBox, BorderLayout.CENTER);
 
         this.getContentPane().add(mainPanel);
     }
@@ -158,9 +167,18 @@ public class View extends JFrame {
         JOptionPane.showMessageDialog(this, turn + " ist im Schach!");
     }
 
-    public void changeCurColor(String string) {
-        setCurrTurn(string);
+    public void changeCurColor(String color) {
+        setCurrTurn(color);
         turn.setText("" + getCurrTurn());
+        turn.setOpaque(true);
+        if(color.equals("white"))
+        {
+            turn.setBackground(Color.WHITE);
+            turn.setForeground(Color.BLACK);
+        }else{
+            turn.setBackground(Color.BLACK);
+            turn.setForeground(Color.WHITE);
+        }
     }
 
     public void addActionListeners(ActionListener a) {
@@ -236,6 +254,38 @@ public class View extends JFrame {
 
     void addToChat(String string) {
         chatArea.append(string + "\n");
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {//Windows
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new View(new Board(), new Game(), "white").setVisible(true);
+            }
+        });
     }
 
 }
