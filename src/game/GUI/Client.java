@@ -1,5 +1,6 @@
 package game.GUI;
 
+import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
 import java.io.IOException;
@@ -28,7 +29,13 @@ public class Client extends Connectable {
                 try {
                     packet = (Packet) in.readObject();
                     game.handleReceivedPacket(packet);
-                } catch (ClassNotFoundException classNot) {
+                } catch (Exception e) {
+                     try {
+                        Message m = (Message) in.readObject();
+                        game.handleMessage(m);
+                    } catch (ClassNotFoundException ex) {
+                        System.out.println("hey");
+                    }
                 }
             } while (!packet.isExit());
         } catch (Exception e) {

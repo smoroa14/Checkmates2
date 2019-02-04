@@ -36,6 +36,10 @@ public class Game {
         connectable.sendPacket(new Packet(command, restart, restartConfirm, undo, exit));
     }
 
+    public void sendMessage(Message m) {
+        connectable.sendMessage(m);
+    }
+
     public void handleReceivedPacket(Packet packet) {
         if (packet.getCommand() != null) {
             controller.move(packet.getCommand().getVon(), packet.getCommand().getNach());
@@ -60,6 +64,10 @@ public class Game {
             view.opponentQuit();
             view.close();
         }
+    }
+
+    public void handleMessage(Message m) {
+        view.addToChat(m.getSender() + ":  " + m.getText());
     }
 
     public Controller getController() {

@@ -1,6 +1,7 @@
 package game.bl;
 
 import game.GUI.Game;
+import game.beans.Message;
 import game.beans.Packet;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,11 +17,22 @@ public abstract class Connectable {
     public Connectable() {
         this.setGame(new Game(this));
     }
-    
+
     public void sendPacket(Packet packet) {
         try {
             if (out != null) {
                 out.writeObject(packet);
+                out.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessage(Message m) {
+        try {
+            if (out != null) {
+                out.writeObject(m);
                 out.flush();
             }
         } catch (IOException e) {
@@ -46,5 +58,9 @@ public abstract class Connectable {
 
     public void handlePacket(Packet packet) {
         game.handleReceivedPacket(packet);
+    }
+    
+    public void handleMessage(Message m){
+        game.handleMessage(m);
     }
 }

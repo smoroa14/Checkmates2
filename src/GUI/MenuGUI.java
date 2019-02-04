@@ -6,17 +6,14 @@
 package GUI;
 
 import Server.Client_Connection;
-import Server.Server_Connection;
 import beans.Raum;
 import game.GUI.starter;
-import java.awt.Color;
 import java.util.LinkedList;
 import threads.SoundPlayer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import pojos.Player;
 
 /**
@@ -26,12 +23,11 @@ import pojos.Player;
 public class MenuGUI extends javax.swing.JFrame {
     
     private SoundPlayer player = SoundPlayer.getInstance();
-    private Player u;
+    public static Player u;
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
     LinkedList<Raum> raumlist = new LinkedList<>();
     boolean used = false;
     Raum selectedroom;
-    private Client_Connection client_conn;
 
     //private DB_Access access = DB_Access.getInstance();
     public Player getS() {
