@@ -30,12 +30,12 @@ public class Client extends Connectable {
                     packet = (Packet) in.readObject();
                     game.handleReceivedPacket(packet);
                 } catch (Exception e) {
-                     try {
-                        Message m = (Message) in.readObject();
-                        game.handleMessage(m);
-                    } catch (ClassNotFoundException ex) {
-                        System.out.println("hey");
-                    }
+//                     try {
+//                        Message m = (Message) in.readObject();
+//                        game.handleMessage(m);
+//                    } catch (ClassNotFoundException ex) {
+//                        System.out.println("hey");
+//                    }
                 }
             } while (!packet.isExit());
         } catch (Exception e) {

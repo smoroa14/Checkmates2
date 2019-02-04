@@ -40,12 +40,12 @@ public class Server extends Connectable {
                     packet = (Packet) in.readObject();
                     handlePacket(packet);
                 } catch (Exception e) {
-                    try {
-                        Message m = (Message) in.readObject();
-                        handleMessage(m);
-                    } catch (ClassNotFoundException ex) {
-                        System.out.println("hey");
-                    }
+//                    try {
+//                        Message m = (Message) in.readObject();
+//                        handleMessage(m);
+//                    } catch (ClassNotFoundException ex) {
+//                        System.out.println("hey");
+//                    }
                 }
             } while (!packet.isExit());
         } catch (IOException e) {

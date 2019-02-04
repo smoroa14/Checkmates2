@@ -11,6 +11,7 @@ public class Packet implements Serializable {
 	private boolean restartConfirm;
 	private boolean undo;
 	private boolean exit;
+        private Message message;
 	
 	public Packet() {
 		setCom(null);
@@ -26,6 +27,16 @@ public class Packet implements Serializable {
 		this.setRestartConfirm(restartConfirm);
 		this.setUndo(undo);
 		this.setExit(exit);
+		this.setMessage(null);
+	}
+	
+	public Packet(Command command, boolean restart, boolean restartConfirm, boolean undo, boolean exit, Message message) {
+		this.setCom(command);
+		this.setRestart(restart);
+		this.setRestartConfirm(restartConfirm);
+		this.setUndo(undo);
+		this.setExit(exit);
+		this.setMessage(message);
 	}
 
 	public Command getCommand() {
@@ -67,4 +78,13 @@ public class Packet implements Serializable {
 	public void setExit(boolean exit) {
 		this.exit = exit;
 	}
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+        
 }

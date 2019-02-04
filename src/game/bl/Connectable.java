@@ -29,17 +29,6 @@ public abstract class Connectable {
         }
     }
 
-    public void sendMessage(Message m) {
-        try {
-            if (out != null) {
-                out.writeObject(m);
-                out.flush();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Game getGame() {
         return game;
     }

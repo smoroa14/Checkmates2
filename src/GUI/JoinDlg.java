@@ -14,9 +14,10 @@ public class JoinDlg extends javax.swing.JDialog {
     /**
      * Creates new form JoinDlg
      */
-    public JoinDlg(java.awt.Frame parent, boolean modal) {
+    public JoinDlg(java.awt.Frame parent, boolean modal, String ip) {
         super(parent, modal);
         initComponents();
+        tfIp.setText(ip);
     }
 
     private String ip;
@@ -111,7 +112,7 @@ public class JoinDlg extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JoinDlg dialog = new JoinDlg(new javax.swing.JFrame(), true);
+                JoinDlg dialog = new JoinDlg(new javax.swing.JFrame(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

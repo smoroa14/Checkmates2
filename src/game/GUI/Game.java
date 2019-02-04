@@ -36,8 +36,9 @@ public class Game {
         connectable.sendPacket(new Packet(command, restart, restartConfirm, undo, exit));
     }
 
-    public void sendMessage(Message m) {
-        connectable.sendMessage(m);
+    public void sendMessage(Packet p) {
+        connectable.sendPacket(p);
+        handleMessage(p.getMessage());
     }
 
     public void handleReceivedPacket(Packet packet) {
@@ -63,6 +64,10 @@ public class Game {
         if (packet.isExit()) {
             view.opponentQuit();
             view.close();
+        }
+        if(packet.getMessage() != null)
+        {
+            handleMessage(packet.getMessage());
         }
     }
 

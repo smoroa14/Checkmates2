@@ -8,6 +8,8 @@ package GUI;
 import Server.Client_Connection;
 import beans.Raum;
 import game.GUI.starter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 import threads.SoundPlayer;
 import java.util.logging.Level;
@@ -21,7 +23,7 @@ import pojos.Player;
  * @author Kevin
  */
 public class MenuGUI extends javax.swing.JFrame {
-    
+
     private SoundPlayer player = SoundPlayer.getInstance();
     public static Player u;
     DefaultListModel<Raum> dlm = new DefaultListModel<>();
@@ -33,23 +35,23 @@ public class MenuGUI extends javax.swing.JFrame {
     public Player getS() {
         return u;
     }
-    
+
     public void setS(Player u) {
         this.u = u;
         lbName.setText("Name: " + u.getUsername());
         lbGeld.setText("Elo: " + u.getMmr());
     }
-    
+
     public void dohier(String name) {
         lbName.setText(name);
     }
-    
+
     public MenuGUI() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         initComponents();
         liRaum.setModel(dlm);
-        
+
     }
 
     /**
@@ -245,9 +247,8 @@ public class MenuGUI extends javax.swing.JFrame {
             String raumname = tfName.getText();
             String raumpasswort = tfPasswort.getText();
             starter.startGame("server", "localhost");
-            
+
             //Server_Connection server = new Server_Connection(raumpasswort);
-            
 //            int raumelo = Integer.parseInt(tfElo.getText());
 //            Raum raum = new Raum(raumname, raumpasswort, raumelo);
 //            
@@ -261,7 +262,6 @@ public class MenuGUI extends javax.swing.JFrame {
 //                dlm.addElement(raum);
 //            }
 //            used = false;
-            
         } catch (NumberFormatException e) {
             System.out.println("ein Feld ist leer");
         }
@@ -283,9 +283,14 @@ public class MenuGUI extends javax.swing.JFrame {
 //        } catch (NullPointerException e) {
 //            System.out.println("Es ist kein Raum ausgewählt!");
 //        }
-        JoinDlg dlg = new JoinDlg(this, true);
+        String ip = "192.168.8.52";
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception ex) {
+        }
+        JoinDlg dlg = new JoinDlg(this, true, ip);
         dlg.setVisible(true);
-        
+
         if (dlg.getIp() != null) {
             System.out.println("ip: " + dlg.getIp());
             starter.startGame("client", dlg.getIp());
@@ -296,7 +301,7 @@ public class MenuGUI extends javax.swing.JFrame {
             String s = client_conn.waitForCommand();
             System.out.println("Server sended: " + s);*/
         }
-        
+
 
     }//GEN-LAST:event_onBeitreten
 
