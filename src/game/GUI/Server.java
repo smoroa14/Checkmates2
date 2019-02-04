@@ -1,5 +1,6 @@
 package game.GUI;
 
+import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
 import java.io.IOException;
@@ -8,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Server extends Connectable {
@@ -36,7 +39,13 @@ public class Server extends Connectable {
                 try {
                     packet = (Packet) in.readObject();
                     handlePacket(packet);
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
+                    try {
+                        Message m = (Message) in.readObject();
+                        handleMessage(m);
+                    } catch (ClassNotFoundException ex) {
+                        System.out.println("hey");
+                    }
                 }
             } while (!packet.isExit());
         } catch (IOException e) {
