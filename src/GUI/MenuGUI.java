@@ -313,7 +313,7 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_onRefresh
 
     private void onDeck(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onDeck
-        DeckGUI deckgui = new DeckGUI();
+        DeckGUI deckgui = new DeckGUI(this);
         deckgui.setP(u);
         deckgui.setVisible(true);
         this.dispose();

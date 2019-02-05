@@ -15,13 +15,15 @@ public class DeckGUI extends javax.swing.JFrame {
 
     private Player p;
     String[] deck = new String[8];
-
+    private MenuGUI gui;
+    
     public void setP(Player p) {
         this.p = p;
         loadDeck();
     }
 
-    public DeckGUI() {
+    public DeckGUI(MenuGUI gui) {
+        this.gui = gui;
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
         initComponents();
@@ -435,8 +437,7 @@ public class DeckGUI extends javax.swing.JFrame {
         String cb8str = (String) cb8.getSelectedItem();
         String[] deck = {cb1str, cb2str, cb3str, cb4str, cb5str, cb6str, cb7str, cb8str};
         DB_Access.getInstance().saveDeck(deck, p.getUsername());
-        LoginGUI logingui = new LoginGUI();
-        logingui.setVisible(true);
+        gui.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_onSpeichern
 
@@ -470,7 +471,7 @@ public class DeckGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeckGUI().setVisible(true);
+                new DeckGUI(null).setVisible(true);
             }
         });
     }
