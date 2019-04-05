@@ -27,7 +27,7 @@ public class View extends JFrame {
 
     private String currTurn;
     private Game game;
-    private String side;
+    public String side;
 
     private JPanel mainPanel;
     private JPanel infoBox;

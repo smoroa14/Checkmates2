@@ -13,14 +13,14 @@ public class Game {
     private Connectable connectable;
 
     public Game() {
-        model = new Model();
+        model = new Model("white");
         view = new View(model.getBoard(), this, "null");
         model.getBoard().changeColor();
         setController(new Controller(model, view, this));
     }
 
     public Game(Connectable connectable) {
-        model = new Model();
+        model = new Model(Server.class==connectable.getClass()?"white":"black");
         setConnectable(connectable);
         if (connectable.getClass() == Server.class) {
             view = new View(model.getBoard(), this, "white");

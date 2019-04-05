@@ -20,6 +20,13 @@ public class Model {
         setBoard(new Board());
         setCommands(new Stack<Command>());
     }
+    
+    public Model(String side) {
+        setWhiteScore(0);
+        setBlackScore(0);
+        setBoard(new Board(side));
+        setCommands(new Stack<Command>());
+    }
 
     public Model(int whiteScore, int blackScore) {
         setWhiteScore(whiteScore);

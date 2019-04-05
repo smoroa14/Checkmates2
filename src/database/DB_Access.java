@@ -97,9 +97,6 @@ public class DB_Access {
         Query getDeckofUser = em.createNamedQuery("Player.findDeck");
         getDeckofUser.setParameter("username", username);
         List<String[]> deck = getDeckofUser.getResultList();
-        for (String[] strings : deck) {
-            System.out.println(strings[0]);
-        }
         return deck.get(0);
     }
     

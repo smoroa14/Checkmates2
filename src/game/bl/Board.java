@@ -1,5 +1,7 @@
 package game.bl;
 
+import bl.CurrentUser;
+import database.DB_Access;
 import game.beans.*;
 import game.bl.*;
 import java.awt.Color;
@@ -12,8 +14,20 @@ import javax.swing.JPanel;
 public class Board extends JPanel {
 
     public Square[][] chessBoard;
+    public String farbe;
+    public String[] deck;
 
     public Board() {
+        String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
+        chessBoard = new Square[8][8];
+        setLayout(new GridLayout(8, 8));
+        boardInit();
+    }
+    
+    public Board(String farbe) {
+        this.farbe = farbe;
+        String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
+        this.deck = deck;
         chessBoard = new Square[8][8];
         setLayout(new GridLayout(8, 8));
         boardInit();
@@ -58,6 +72,22 @@ public class Board extends JPanel {
                 if (y == 1 || y == 6) {
                     p = new Bauer(chessBoard[x][y], color);
                 }
+                
+//                if(y == 0)
+//                {
+//                    if(farbe.equals("white"))
+//                    {
+//                        switch(deck[x])
+//                        {
+//                            case "":
+//                                break;
+//                        }
+//                    }else{
+//                        
+//                    }
+//                }
+                
+                
                 if (y == 0 || y == 7) {
                     switch (x) {
                         case 0:
