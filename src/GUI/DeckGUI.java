@@ -11,13 +11,13 @@ import java.util.Arrays;
 import javax.swing.JComboBox;
 import pojos.Player;
 
-
 public class DeckGUI extends javax.swing.JFrame {
 
     private Player p;
     String[] deck = new String[8];
     private MenuGUI gui;
-    
+    int unitpoints = 0;
+
     public void setP(Player p) {
         this.p = p;
         loadDeck();
@@ -25,43 +25,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
     public DeckGUI(MenuGUI gui) {
         this.gui = gui;
-//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        this.setUndecorated(true);
         initComponents();
-//        if (deck != null) {
-//            for (int i = 0; i < deck.length; i++) {
-//                switch (deck[i]) {
-//                    case "König":
-//                        
-//                        break;
-//                    
-//                    case "Dame":
-//                        pbUnits.setValue(pbUnits.getValue() + 9);
-//                        break;
-//                    
-//                    case "Bauer":
-//                        pbUnits.setValue(pbUnits.getValue() + 1);
-//                        break;
-//                    
-//                    case "Läufer":
-//                        pbUnits.setValue(pbUnits.getValue() + 3);
-//                        break;
-//                    
-//                    case "Springer":
-//                        pbUnits.setValue(pbUnits.getValue() + 3);
-//                        break;
-//                    
-//                    case "Turm":
-//                        pbUnits.setValue(pbUnits.getValue() + 5);
-//                        break;
-//                    
-//                    case "Agent":
-//                        pbUnits.setValue(pbUnits.getValue() + 2);
-//                        break;
-//                }
-//                
-//            }
-//        }
 
     }
 
@@ -84,6 +48,7 @@ public class DeckGUI extends javax.swing.JFrame {
             cb7.setSelectedItem(deck[6]);
             lb8.setIcon(Loader.loadImage(deck[7] + "Avatar.png"));
             cb8.setSelectedItem(deck[7]);
+            lbUnits.setText(pbUnits.getValue() + "/" + pbUnits.getMaximum());
         }
     }
 
@@ -98,10 +63,12 @@ public class DeckGUI extends javax.swing.JFrame {
 
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
         pbUnits = new javax.swing.JProgressBar();
+        lbUnits = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btSpeichern = new javax.swing.JButton();
+        btAbbrechen = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         cb1 = new javax.swing.JComboBox<>();
@@ -137,30 +104,38 @@ public class DeckGUI extends javax.swing.JFrame {
         jLabel1.setText("Deck bearbeiten");
         jPanel11.add(jLabel1);
 
+        jPanel12.setLayout(new java.awt.BorderLayout());
+
         pbUnits.setMaximum(31);
-        jPanel11.add(pbUnits);
+        jPanel12.add(pbUnits, java.awt.BorderLayout.CENTER);
+
+        lbUnits.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
+        lbUnits.setText("0/20");
+        jPanel12.add(lbUnits, java.awt.BorderLayout.LINE_END);
+
+        jPanel11.add(jPanel12);
 
         getContentPane().add(jPanel11, java.awt.BorderLayout.NORTH);
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 2));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jButton1.setText("Speichern");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btSpeichern.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        btSpeichern.setText("Speichern");
+        btSpeichern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onSpeichern(evt);
             }
         });
-        jPanel2.add(jButton1);
+        jPanel2.add(btSpeichern);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jButton2.setText("Abbrechen");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btAbbrechen.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        btAbbrechen.setText("Abbrechen");
+        btAbbrechen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onAbbrechen(evt);
             }
         });
-        jPanel2.add(jButton2);
+        jPanel2.add(btAbbrechen);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
@@ -389,37 +364,45 @@ public class DeckGUI extends javax.swing.JFrame {
                 break;
 
         }
-       pbUnits.setValue(0);
+        pbUnits.setValue(0);
+        unitpoints=0;
         for (int i = 0; i < deck.length; i++) {
             if (deck[i] != null) {
                 switch (deck[i]) {
                     case "Dame":
-                        pbUnits.setValue(pbUnits.getValue() + 9);
+                        unitpoints += 9;
                         break;
 
                     case "Bauer":
-                        pbUnits.setValue(pbUnits.getValue() + 1);
+                        unitpoints += 1;
                         break;
 
                     case "Läufer":
-                        pbUnits.setValue(pbUnits.getValue() + 3);
+                        unitpoints += 3;
                         break;
 
                     case "Springer":
-                        pbUnits.setValue(pbUnits.getValue() + 3);
+                        unitpoints += 3;
                         break;
 
                     case "Turm":
-                        pbUnits.setValue(pbUnits.getValue() + 5);
+                        unitpoints += 5;
                         break;
 
                     case "Agent":
-                        pbUnits.setValue(pbUnits.getValue() + 2);
+                        unitpoints += 2;
                         break;
                 }
             }
 
         }
+        pbUnits.setValue(unitpoints);
+        if (unitpoints > pbUnits.getMaximum()) {
+            btSpeichern.setEnabled(false);
+        } else {
+            btSpeichern.setEnabled(true);
+        }
+        lbUnits.setText(unitpoints + "/" + pbUnits.getMaximum());
         System.out.println(name);
     }//GEN-LAST:event_onSelect
 
@@ -479,6 +462,8 @@ public class DeckGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAbbrechen;
+    private javax.swing.JButton btSpeichern;
     private javax.swing.JComboBox<String> cb1;
     private javax.swing.JComboBox<String> cb2;
     private javax.swing.JComboBox<String> cb3;
@@ -487,12 +472,11 @@ public class DeckGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb6;
     private javax.swing.JComboBox<String> cb7;
     private javax.swing.JComboBox<String> cb8;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -509,6 +493,7 @@ public class DeckGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb6;
     private javax.swing.JLabel lb7;
     private javax.swing.JLabel lb8;
+    private javax.swing.JLabel lbUnits;
     private javax.swing.JProgressBar pbUnits;
     // End of variables declaration//GEN-END:variables
 }
