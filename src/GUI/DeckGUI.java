@@ -7,6 +7,7 @@ package GUI;
 
 import bl.Loader;
 import database.DB_Access;
+import java.util.Arrays;
 import javax.swing.JComboBox;
 import pojos.Player;
 
@@ -437,6 +438,7 @@ public class DeckGUI extends javax.swing.JFrame {
         String cb8str = (String) cb8.getSelectedItem();
         String[] deck = {cb1str, cb2str, cb3str, cb4str, cb5str, cb6str, cb7str, cb8str};
         DB_Access.getInstance().saveDeck(deck, p.getUsername());
+        //DB_Access.getInstance().loadDeck(p.getUsername());
         gui.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_onSpeichern
