@@ -5,6 +5,7 @@ import database.DB_Access;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
+import game.bl.Controller;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -40,10 +41,12 @@ public class Client extends Connectable {
                 } catch (Exception e) {
                     try {
                         String[] arr = (String[]) o;
+                        System.out.println("Client: von server");
                         for (String string : arr) {
                             System.out.print(string + ", ");
                         }
                         game.getModel().getBoard().addEnemyBoard(arr);
+                        game.getModel().addActionListeners(Controller.instance);
 
                     } catch (Exception ex) {
                         ex.printStackTrace();

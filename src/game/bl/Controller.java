@@ -13,6 +13,8 @@ import java.util.List;
 
 public class Controller implements ActionListener {
 
+    public static Controller instance;
+    
     private Model model;
     private View view;
     private Square selectedSquare;
@@ -20,6 +22,7 @@ public class Controller implements ActionListener {
     private Game game;
 
     public Controller(Model model, View view, Game game) {
+        this.instance = this;
         this.setModel(model);
         this.setView(view);
         this.setGame(game);
@@ -31,9 +34,9 @@ public class Controller implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         String action = e.getActionCommand();
-
+        System.out.println(action);
+        
         switch (action) {
             case "square":
                 isClicked((Square) e.getSource());

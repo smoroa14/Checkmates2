@@ -68,7 +68,7 @@ public class View extends JFrame {
         createPanels();
         createMenu();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setResizable(false);
+        //this.setResizable(false);
         this.setSize(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(new Dimension(528, 446))))))))))))))));
         this.setVisible(true);
         this.addWindowListener(new WindowAdapter() {

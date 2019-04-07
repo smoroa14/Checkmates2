@@ -5,6 +5,7 @@ import database.DB_Access;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
+import game.bl.Controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -45,10 +46,12 @@ public class Server extends Connectable {
                 } catch (Exception e) {
                     try {
                         String[] arr = (String[]) o;
+                        System.out.println("Server: von client");
                         for (String string : arr) {
-                            System.out.println(string + ", ");
+                            System.out.print(string + ", ");
                         }
                         game.getModel().getBoard().addEnemyBoard(arr);
+                        game.getModel().addActionListeners(Controller.instance);
                         out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
 
                     } catch (Exception ex) {

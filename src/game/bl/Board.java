@@ -4,9 +4,12 @@ import bl.CurrentUser;
 import database.DB_Access;
 import game.beans.*;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -25,7 +28,7 @@ public class Board extends JPanel {
         chessBoard = new Square[8][8];
         this.deck = deck;
         setLayout(new GridLayout(8, 8));
-        boardInit(deck);
+        boardInit(null);
     }
 
     public Board(String farbe) {
@@ -36,7 +39,7 @@ public class Board extends JPanel {
         this.deck = deck;
         chessBoard = new Square[8][8];
         setLayout(new GridLayout(8, 8));
-        boardInit(deck);
+        boardInit(null);
     }
 
     public void changeColor() {
@@ -56,6 +59,7 @@ public class Board extends JPanel {
     public void boardInit(String[] dd) {
         removeAll();
 
+        this.repaint();
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
 
@@ -79,7 +83,7 @@ public class Board extends JPanel {
                 if (y == 1 || y == 6) {
                     p = new Bauer(chessBoard[x][y], color);
                 } else {
-                    p = addCustomBoard(x, y, p, color, enemydeck);
+                    p = addCustomBoard(x, y, p, color, dd);
                 }
 
 //                if (y == 0 || y == 7) {
@@ -106,10 +110,14 @@ public class Board extends JPanel {
 //                }
                 chessBoard[x][y].setBesetzt_von(p);
                 add(chessBoard[x][y]);
+                
+                this.repaint();
             }
         }
-        System.out.println(this.getComponents().length);
-        this.repaint();
+        for (Component component : getComponents()) {
+            System.out.println(((Square)component).getIcon());
+            component.repaint();
+        }
     }
 
     public void addEnemyBoard(String[] enemydeck) {
