@@ -3,7 +3,6 @@ package game.bl;
 import bl.CurrentUser;
 import database.DB_Access;
 import game.beans.*;
-import game.bl.*;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -16,9 +15,13 @@ public class Board extends JPanel {
     public Square[][] chessBoard;
     public String farbe;
     public String[] deck;
+    public String[] enemydeck;
+    public String enemyUser;
 
     public Board() {
         String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
+        //String[] enemydeck = DB_Access.getInstance().loadDeck(enemyUser);
+
         chessBoard = new Square[8][8];
         this.deck = deck;
         setLayout(new GridLayout(8, 8));
@@ -28,6 +31,8 @@ public class Board extends JPanel {
     public Board(String farbe) {
         this.farbe = farbe;
         String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
+        //String[] enemydeck = DB_Access.getInstance().loadDeck(enemyUser);
+
         this.deck = deck;
         chessBoard = new Square[8][8];
         setLayout(new GridLayout(8, 8));
@@ -48,10 +53,9 @@ public class Board extends JPanel {
         }
     }
 
-    public void boardInit(String[] enemydeck) {
+    public void boardInit(String[] dd) {
         removeAll();
-        this.chessBoard = new Square[8][8];
-        setLayout(new GridLayout(8, 8));
+
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
 
@@ -74,10 +78,9 @@ public class Board extends JPanel {
 
                 if (y == 1 || y == 6) {
                     p = new Bauer(chessBoard[x][y], color);
+                } else {
+                    p = addCustomBoard(x, y, p, color, enemydeck);
                 }
-
-                p = addCustomBoard(x, y, p, color, enemydeck);
-                System.out.println(x + " " + y);
 
 //                if (y == 0 || y == 7) {
 //                    switch (x) {
@@ -137,8 +140,16 @@ public class Board extends JPanel {
                     p = new Turm(chessBoard[x][y], color);
                     break;
 
+                case "König":
+                    p = new Konig(chessBoard[x][y], color);
+                    break;
+
                 case "Agent":
                     p = new Bauer(chessBoard[x][y], color);
+                    break;
+
+                case "Drache":
+                    p = new Drache(chessBoard[x][y], color);
                     break;
             }
         } else if (enemydeck != null && (y == 7 && farbe.equals("black")) || (y == 0 && farbe.equals("white"))) {
@@ -161,12 +172,20 @@ public class Board extends JPanel {
                         p = new Springer(chessBoard[x][y], color);
                         break;
 
+                    case "König":
+                        p = new Konig(chessBoard[x][y], color);
+                        break;
+
                     case "Turm":
                         p = new Turm(chessBoard[x][y], color);
                         break;
 
                     case "Agent":
                         p = new Bauer(chessBoard[x][y], color);
+                        break;
+
+                    case "Drache":
+                        p = new Drache(chessBoard[x][y], color);
                         break;
                 }
             } catch (Exception e) {
