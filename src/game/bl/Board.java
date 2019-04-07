@@ -20,8 +20,9 @@ public class Board extends JPanel {
     public Board() {
         String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
         chessBoard = new Square[8][8];
+        this.deck = deck;
         setLayout(new GridLayout(8, 8));
-        boardInit(null);
+        boardInit(deck);
     }
 
     public Board(String farbe) {
@@ -30,7 +31,7 @@ public class Board extends JPanel {
         this.deck = deck;
         chessBoard = new Square[8][8];
         setLayout(new GridLayout(8, 8));
-        boardInit(null);
+        boardInit(deck);
     }
 
     public void changeColor() {
@@ -49,6 +50,8 @@ public class Board extends JPanel {
 
     public void boardInit(String[] enemydeck) {
         removeAll();
+        this.chessBoard = new Square[8][8];
+        setLayout(new GridLayout(8, 8));
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
 
@@ -73,7 +76,8 @@ public class Board extends JPanel {
                     p = new Bauer(chessBoard[x][y], color);
                 }
 
-                addCustomBoard(x, y, p, color, enemydeck);
+                p = addCustomBoard(x, y, p, color, enemydeck);
+                System.out.println(x + " " + y);
 
 //                if (y == 0 || y == 7) {
 //                    switch (x) {
@@ -101,15 +105,17 @@ public class Board extends JPanel {
                 add(chessBoard[x][y]);
             }
         }
+        System.out.println(this.getComponents().length);
+        this.repaint();
     }
 
     public void addEnemyBoard(String[] enemydeck) {
         boardInit(enemydeck);
     }
 
-    public void addCustomBoard(int x, int y, Piece p, String color, String[] enemydeck) {
+    public Piece addCustomBoard(int x, int y, Piece p, String color, String[] enemydeck) {
 
-        if ((y == 0 && farbe.equals("white")) || (y == 7 && farbe.equals("black"))) {
+        if ((y == 7 && farbe.equals("white")) || (y == 0 && farbe.equals("black"))) {
             switch (deck[x]) {
                 case "Dame":
                     p = new Konigin(chessBoard[x][y], color);
@@ -135,7 +141,7 @@ public class Board extends JPanel {
                     p = new Bauer(chessBoard[x][y], color);
                     break;
             }
-        } else if (enemydeck != null && (y == 0 && farbe.equals("black")) || (y == 7 && farbe.equals("white"))) {
+        } else if (enemydeck != null && (y == 7 && farbe.equals("black")) || (y == 0 && farbe.equals("white"))) {
             // gegners deck
             try {
                 switch (enemydeck[x]) {
@@ -166,6 +172,7 @@ public class Board extends JPanel {
             } catch (Exception e) {
             }
         }
+        return p;
     }
 
     public boolean move(Point from, Point to) {

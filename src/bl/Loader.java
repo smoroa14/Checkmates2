@@ -44,6 +44,7 @@ public class Loader {
 
     try {
       String filepath = System.getProperty("user.dir") + src + "images" + File.separator + filename;
+        System.out.println(filename);
       //System.out.println(filename);
       img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
       img = ImageIO.read(new File(filepath));

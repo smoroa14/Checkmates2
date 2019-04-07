@@ -29,21 +29,27 @@ public class Client extends Connectable {
             System.out.println("Connected to " + ip + " in port 2004");
             out = new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
-            
+
             out.flush();
             in = new ObjectInputStream(socket.getInputStream());
             do {
+                Object o = in.readObject();
                 try {
-                    packet = (Packet) in.readObject();
-                    game.handleReceivedPacket(packet);
+                    packet = (Packet) o;
+                    handlePacket(packet);
                 } catch (Exception e) {
                     try {
-                         String[] deckarr = (String[]) in.readObject();
-                         game.getModel().getBoard().addEnemyBoard(deckarr);
+                        String[] arr = (String[]) o;
+                        for (String string : arr) {
+                            System.out.print(string + ", ");
+                        }
+                        game.getModel().getBoard().addEnemyBoard(arr);
+
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                 }
-            } while (!packet.isExit());
+            } while (packet == null || !packet.isExit());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

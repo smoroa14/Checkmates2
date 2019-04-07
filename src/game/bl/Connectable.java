@@ -28,6 +28,17 @@ public abstract class Connectable {
             e.printStackTrace();
         }
     }
+    
+    public void sendBoard(String[] arr) {
+        try {
+            if (out != null) {
+                out.writeObject(arr);
+                out.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Game getGame() {
         return game;

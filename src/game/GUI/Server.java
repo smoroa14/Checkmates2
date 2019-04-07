@@ -1,5 +1,7 @@
 package game.GUI;
 
+import bl.CurrentUser;
+import database.DB_Access;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
@@ -28,7 +30,7 @@ public class Server extends Connectable {
         try {
             serverSocket = new ServerSocket(2004, 10);
             JOptionPane.showMessageDialog(null, "Deine ip ist: " + InetAddress.getLocalHost().getHostAddress());
-            
+
             System.out.println("Waiting for connection");
             connection = serverSocket.accept();
             System.out.println("Connected from " + connection.getInetAddress().getHostName());
@@ -36,19 +38,25 @@ public class Server extends Connectable {
             out.flush();
             in = new ObjectInputStream(connection.getInputStream());
             do {
+                Object o = in.readObject();
                 try {
-                    packet = (Packet) in.readObject();
+                    packet = (Packet) o;
                     handlePacket(packet);
                 } catch (Exception e) {
-//                    try {
-//                        Message m = (Message) in.readObject();
-//                        handleMessage(m);
-//                    } catch (ClassNotFoundException ex) {
-//                        System.out.println("hey");
-//                    }
+                    try {
+                        String[] arr = (String[]) o;
+                        for (String string : arr) {
+                            System.out.println(string + ", ");
+                        }
+                        game.getModel().getBoard().addEnemyBoard(arr);
+                        out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
-            } while (!packet.isExit());
-        } catch (IOException e) {
+            } while (packet == null || !packet.isExit());
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
