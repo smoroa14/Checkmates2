@@ -45,6 +45,7 @@ public class Game {
         if (packet.getCommand() != null) {
             controller.move(packet.getCommand().getVon(), packet.getCommand().getNach());
         }
+        
         if (packet.isRestart()) {
             if (packet.isRestartConfirm()) {
                 controller.resetBoard();

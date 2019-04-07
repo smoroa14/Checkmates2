@@ -1,12 +1,17 @@
 package game.GUI;
 
+import bl.CurrentUser;
+import database.DB_Access;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import pojos.Player;
 
 public class Client extends Connectable {
 
@@ -23,6 +28,8 @@ public class Client extends Connectable {
             socket = new Socket(ip, 2004);
             System.out.println("Connected to " + ip + " in port 2004");
             out = new ObjectOutputStream(socket.getOutputStream());
+            out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
+            
             out.flush();
             in = new ObjectInputStream(socket.getInputStream());
             do {
@@ -30,12 +37,11 @@ public class Client extends Connectable {
                     packet = (Packet) in.readObject();
                     game.handleReceivedPacket(packet);
                 } catch (Exception e) {
-//                     try {
-//                        Message m = (Message) in.readObject();
-//                        game.handleMessage(m);
-//                    } catch (ClassNotFoundException ex) {
-//                        System.out.println("hey");
-//                    }
+                    try {
+                         String[] deckarr = (String[]) in.readObject();
+                         game.getModel().getBoard().addEnemyBoard(deckarr);
+                    } catch (Exception ex) {
+                    }
                 }
             } while (!packet.isExit());
         } catch (Exception e) {

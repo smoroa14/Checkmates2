@@ -21,16 +21,16 @@ public class Board extends JPanel {
         String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
         chessBoard = new Square[8][8];
         setLayout(new GridLayout(8, 8));
-        boardInit();
+        boardInit(null);
     }
-    
+
     public Board(String farbe) {
         this.farbe = farbe;
         String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
         this.deck = deck;
         chessBoard = new Square[8][8];
         setLayout(new GridLayout(8, 8));
-        boardInit();
+        boardInit(null);
     }
 
     public void changeColor() {
@@ -47,7 +47,7 @@ public class Board extends JPanel {
         }
     }
 
-    public void boardInit() {
+    public void boardInit(String[] enemydeck) {
         removeAll();
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
@@ -72,47 +72,98 @@ public class Board extends JPanel {
                 if (y == 1 || y == 6) {
                     p = new Bauer(chessBoard[x][y], color);
                 }
-                
-//                if(y == 0)
-//                {
-//                    if(farbe.equals("white"))
-//                    {
-//                        switch(deck[x])
-//                        {
-//                            case "":
-//                                break;
-//                        }
-//                    }else{
-//                        
+
+                addCustomBoard(x, y, p, color, enemydeck);
+
+//                if (y == 0 || y == 7) {
+//                    switch (x) {
+//                        case 0:
+//                        case 7:
+//                            p = new Turm(chessBoard[x][y], color);
+//                            break;
+//                        case 1:
+//                        case 6:
+//                            p = new Springer(chessBoard[x][y], color);
+//                            break;
+//                        case 2:
+//                        case 5:
+//                            p = new Laufer(chessBoard[x][y], color);
+//                            break;
+//                        case 3:
+//                            p = new Konigin(chessBoard[x][y], color);
+//                            break;
+//                        case 4:
+//                            p = new Konig(chessBoard[x][y], color);
+//                            break;
 //                    }
 //                }
-                
-                
-                if (y == 0 || y == 7) {
-                    switch (x) {
-                        case 0:
-                        case 7:
-                            p = new Turm(chessBoard[x][y], color);
-                            break;
-                        case 1:
-                        case 6:
-                            p = new Springer(chessBoard[x][y], color);
-                            break;
-                        case 2:
-                        case 5:
-                            p = new Laufer(chessBoard[x][y], color);
-                            break;
-                        case 3:
-                            p = new Konigin(chessBoard[x][y], color);
-                            break;
-                        case 4:
-                            p = new Konig(chessBoard[x][y], color);
-                            break;
-                    }
-                }
-
                 chessBoard[x][y].setBesetzt_von(p);
                 add(chessBoard[x][y]);
+            }
+        }
+    }
+
+    public void addEnemyBoard(String[] enemydeck) {
+        boardInit(enemydeck);
+    }
+
+    public void addCustomBoard(int x, int y, Piece p, String color, String[] enemydeck) {
+
+        if ((y == 0 && farbe.equals("white")) || (y == 7 && farbe.equals("black"))) {
+            switch (deck[x]) {
+                case "Dame":
+                    p = new Konigin(chessBoard[x][y], color);
+                    break;
+
+                case "Bauer":
+                    p = new Bauer(chessBoard[x][y], color);
+                    break;
+
+                case "Läufer":
+                    p = new Laufer(chessBoard[x][y], color);
+                    break;
+
+                case "Springer":
+                    p = new Springer(chessBoard[x][y], color);
+                    break;
+
+                case "Turm":
+                    p = new Turm(chessBoard[x][y], color);
+                    break;
+
+                case "Agent":
+                    p = new Bauer(chessBoard[x][y], color);
+                    break;
+            }
+        } else if (enemydeck != null && (y == 0 && farbe.equals("black")) || (y == 7 && farbe.equals("white"))) {
+            // gegners deck
+            try {
+                switch (enemydeck[x]) {
+                    case "Dame":
+                        p = new Konigin(chessBoard[x][y], color);
+                        break;
+
+                    case "Bauer":
+                        p = new Bauer(chessBoard[x][y], color);
+                        break;
+
+                    case "Läufer":
+                        p = new Laufer(chessBoard[x][y], color);
+                        break;
+
+                    case "Springer":
+                        p = new Springer(chessBoard[x][y], color);
+                        break;
+
+                    case "Turm":
+                        p = new Turm(chessBoard[x][y], color);
+                        break;
+
+                    case "Agent":
+                        p = new Bauer(chessBoard[x][y], color);
+                        break;
+                }
+            } catch (Exception e) {
             }
         }
     }
