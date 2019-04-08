@@ -31,7 +31,7 @@ public class Client extends Connectable {
             socket = new Socket(ip, 2004);
             System.out.println("Connected to " + ip + " in port 2004");
             out = new ObjectOutputStream(socket.getOutputStream());
-            String pw = JOptionPane.showInputDialog("Password: ");
+            String pw = CurrentUser.password;
             String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
             out.writeObject(new JoiningParameter(pw, deck));
             out.flush();

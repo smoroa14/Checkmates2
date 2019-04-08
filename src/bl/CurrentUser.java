@@ -13,6 +13,6 @@ import pojos.Player;
  */
 public class CurrentUser {
     public static Player player;
-    public static String password;
+    public static String password = "";
     public static boolean gamestarted = false;
 }

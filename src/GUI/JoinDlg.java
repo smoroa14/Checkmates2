@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import bl.CurrentUser;
+
 /**
  *
  * @author Nico
@@ -78,6 +80,7 @@ public class JoinDlg extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ip = tfIp.getText();
         pw = tfPw.getText();
+        CurrentUser.password = pw;
         
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
