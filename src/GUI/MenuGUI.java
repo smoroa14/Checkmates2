@@ -49,7 +49,6 @@ public class MenuGUI extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         initComponents();
-        liRaum.setModel(dlm);
 
     }
 
@@ -64,7 +63,6 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -79,8 +77,7 @@ public class MenuGUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        liRaum = new javax.swing.JList<>();
+        jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
@@ -101,15 +98,6 @@ public class MenuGUI extends javax.swing.JFrame {
         getContentPane().add(jButton4, java.awt.BorderLayout.SOUTH);
 
         jPanel8.setLayout(new java.awt.BorderLayout());
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jButton3.setText("Refresh");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onRefresh(evt);
-            }
-        });
-        jPanel8.add(jButton3, java.awt.BorderLayout.SOUTH);
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -169,15 +157,9 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        liRaum.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        liRaum.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                onSelect(evt);
-            }
-        });
-        jScrollPane1.setViewportView(liRaum);
-
-        jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Lobby.jpg"))); // NOI18N
+        jPanel6.add(jLabel7, java.awt.BorderLayout.CENTER);
 
         jPanel5.add(jPanel6, java.awt.BorderLayout.CENTER);
 
@@ -305,15 +287,6 @@ public class MenuGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_onBeitreten
 
-    private void onSelect(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_onSelect
-        int index = liRaum.getSelectedIndex();
-        selectedroom = dlm.get(index);
-    }//GEN-LAST:event_onSelect
-
-    private void onRefresh(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onRefresh
-
-    }//GEN-LAST:event_onRefresh
-
     private void onDeck(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onDeck
         DeckGUI deckgui = new DeckGUI(this);
         deckgui.setP(u);
@@ -359,7 +332,6 @@ public class MenuGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -368,6 +340,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -376,10 +349,8 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbGeld;
     private javax.swing.JLabel lbName;
-    private javax.swing.JList<Raum> liRaum;
     private javax.swing.JTextField tfElo;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPasswort;
