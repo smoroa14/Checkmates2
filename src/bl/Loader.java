@@ -14,48 +14,45 @@ import java.util.TreeMap;
 
 public class Loader {
 
-  static {
-    loadConfig();
-  }
+    static {
+        loadConfig();
+    }
 
-  private static String src;
-  private static Map<String, ImageIcon> imageIconMap = new TreeMap<>();
+    private static String src;
+    private static Map<String, ImageIcon> imageIconMap = new TreeMap<>();
 //  public static List<Figur> friendFigures = new LinkedList<>();
 //  public static List<Figur> enemyFigures = new LinkedList<>();
 
-  public static void loadConfig() {
-    try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator + "config.config"))) {
-      src = br.readLine().split(": ")[1];
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static Icon loadImage(String filename) {
-    if(filename.equalsIgnoreCase("null.png"))
-    {
-      //return null;
-    }
-    if (imageIconMap.containsKey(filename)) {
-      return imageIconMap.get(filename);
-    }
-    loadConfig();
-    BufferedImage img = null;
-
-    try {
-      String filepath = System.getProperty("user.dir") + src + "images" + File.separator + filename;
-        System.out.println(filename);
-      //System.out.println(filename);
-      img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-      img = ImageIO.read(new File(filepath));
-      imageIconMap.put(filename, new ImageIcon(img));
-    } catch (IOException e) {
-      e.printStackTrace();
+    public static void loadConfig() {
+        try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + File.separator + "config.config"))) {
+            src = br.readLine().split(": ")[1];
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    int width = img.getWidth();
-    int height = img.getHeight();
-/*
+    public static Icon loadImage(String filename) {
+        if (filename.equalsIgnoreCase("null.png")) {
+            //return null;
+        }
+        if (imageIconMap.containsKey(filename)) {
+            return imageIconMap.get(filename);
+        }
+        loadConfig();
+        BufferedImage img = null;
+
+        try {
+            String filepath = System.getProperty("user.dir") + src + "images" + File.separator + filename;
+            img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+            img = ImageIO.read(new File(filepath));
+            imageIconMap.put(filename, new ImageIcon(img));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int width = img.getWidth();
+        int height = img.getHeight();
+        /*
     int[] pixels = img.getRGB(0, 0, width, height, null, 0, width);
 
     for (int i = 0; i < pixels.length; i++) {
@@ -68,11 +65,11 @@ public class Loader {
       pixels[i] = new Color(r, g, b, a).getRGB();
     }
     System.out.println();
-*/
-    return new ImageIcon(img);
-  }
+         */
+        return new ImageIcon(img);
+    }
 
-  public static void loadSpielfeld() {
+    public static void loadSpielfeld() {
 //    List<Figur> curList = enemyFigures;
 //    String filename = System.getProperty("user.dir") + src + "res" + File.separator + "spielfeld.txt";
 //    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -102,10 +99,10 @@ public class Loader {
 //    } catch (IOException e) {
 //      e.printStackTrace();
 //    }
-  }
+    }
 
-  public static String getSoundPath(String file) {
-    loadConfig();
-    return System.getProperty("user.dir") + src + "sounds" + File.separator + file;
-  }
+    public static String getSoundPath(String file) {
+        loadConfig();
+        return System.getProperty("user.dir") + src + "sounds" + File.separator + file;
+    }
 }
