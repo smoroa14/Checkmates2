@@ -6,6 +6,7 @@
 package GUI;
 
 import beans.Raum;
+import bl.CurrentUser;
 import game.GUI.starter;
 import java.net.InetAddress;
 import java.util.LinkedList;
@@ -244,6 +245,7 @@ public class MenuGUI extends javax.swing.JFrame {
         try {
             String raumname = tfName.getText();
             String raumpasswort = tfPasswort.getText();
+            CurrentUser.password = raumpasswort;
             starter.startGame("server", "localhost");
 
             //Server_Connection server = new Server_Connection(raumpasswort);

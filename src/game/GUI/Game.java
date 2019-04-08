@@ -4,6 +4,9 @@ import game.bl.Connectable;
 import game.bl.Controller;
 import game.bl.*;
 import game.beans.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game {
 
@@ -20,7 +23,7 @@ public class Game {
     }
 
     public Game(Connectable connectable) {
-        model = new Model(Server.class==connectable.getClass()?"white":"black");
+        model = new Model(Server.class == connectable.getClass() ? "white" : "black");
         setConnectable(connectable);
         if (connectable.getClass() == Server.class) {
             view = new View(model.getBoard(), this, "white");
@@ -45,7 +48,7 @@ public class Game {
         if (packet.getCommand() != null) {
             controller.move(packet.getCommand().getVon(), packet.getCommand().getNach());
         }
-        
+
         if (packet.isRestart()) {
             if (packet.isRestartConfirm()) {
                 controller.resetBoard();
@@ -66,8 +69,7 @@ public class Game {
             view.opponentQuit();
             view.close();
         }
-        if(packet.getMessage() != null)
-        {
+        if (packet.getMessage() != null) {
             handleMessage(packet.getMessage());
         }
     }
@@ -108,4 +110,15 @@ public class Game {
         this.connectable = connectable;
     }
 
+    public void close() {
+        try {
+            if (connectable instanceof Server) {
+                ((Server) connectable).close();
+            } else {
+                ((Client) connectable).close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

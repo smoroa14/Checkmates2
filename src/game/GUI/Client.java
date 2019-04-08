@@ -2,6 +2,7 @@ package game.GUI;
 
 import bl.CurrentUser;
 import database.DB_Access;
+import game.beans.JoiningParameter;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 import pojos.Player;
 
 public class Client extends Connectable {
@@ -29,8 +31,9 @@ public class Client extends Connectable {
             socket = new Socket(ip, 2004);
             System.out.println("Connected to " + ip + " in port 2004");
             out = new ObjectOutputStream(socket.getOutputStream());
-            out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
-
+            String pw = JOptionPane.showInputDialog("Password: ");
+            String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
+            out.writeObject(new JoiningParameter(pw, deck));
             out.flush();
             in = new ObjectInputStream(socket.getInputStream());
             do {

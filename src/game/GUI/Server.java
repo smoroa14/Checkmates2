@@ -2,6 +2,7 @@ package game.GUI;
 
 import bl.CurrentUser;
 import database.DB_Access;
+import game.beans.JoiningParameter;
 import game.beans.Message;
 import game.beans.Packet;
 import game.bl.Connectable;
@@ -21,6 +22,7 @@ public class Server extends Connectable {
     ServerSocket serverSocket;
     Socket connection = null;
     Packet packet;
+    private boolean restart = false;
 
     Server() {
         super();
@@ -32,41 +34,50 @@ public class Server extends Connectable {
             serverSocket = new ServerSocket(2004, 10);
             JOptionPane.showMessageDialog(null, "Deine ip ist: " + InetAddress.getLocalHost().getHostAddress());
 
-            System.out.println("Waiting for connection");
-            connection = serverSocket.accept();
-            System.out.println("Connected from " + connection.getInetAddress().getHostName());
-            out = new ObjectOutputStream(connection.getOutputStream());
-            out.flush();
-            in = new ObjectInputStream(connection.getInputStream());
             do {
-                Object o = in.readObject();
-                try {
-                    packet = (Packet) o;
-                    handlePacket(packet);
-                } catch (Exception e) {
+                System.out.println("Waiting for connection");
+                connection = serverSocket.accept();
+                System.out.println("Connected from " + connection.getInetAddress().getHostName());
+                out = new ObjectOutputStream(connection.getOutputStream());
+                out.flush();
+                in = new ObjectInputStream(connection.getInputStream());
+                do {
+                    Object o = in.readObject();
                     try {
-                        String[] arr = (String[]) o;
-                        System.out.println("Server: von client");
-                        for (String string : arr) {
-                            System.out.print(string + ", ");
+                        packet = (Packet) o;
+                        handlePacket(packet);
+                    } catch (Exception e) {
+                        try {
+                            JoiningParameter params = (JoiningParameter) o;
+                            if (!params.getPassword().equals(CurrentUser.password)) {
+                                System.out.println("Password false -> " + params.getPassword() + " != " + CurrentUser.password);
+                                out.writeObject(new Packet(null, false, false, false, true));
+                                restart = true;
+                            } else {
+                                System.out.println("Game starting!");
+                                String[] arr = params.getDeck();
+                                System.out.println("Server: von client");
+                                for (String string : arr) {
+                                    System.out.print(string + ", ");
+                                }
+                                game.getModel().getBoard().addEnemyBoard(arr);
+                                game.getModel().addActionListeners(Controller.instance);
+                                out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            
                         }
-                        game.getModel().getBoard().addEnemyBoard(arr);
-                        game.getModel().addActionListeners(Controller.instance);
-                        out.writeObject(DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername()));
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
                     }
-                }
-            } while (packet == null || !packet.isExit());
+                } while (!restart && (packet == null || !packet.isExit()));
+            } while (restart && !CurrentUser.gamestarted);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+        try {
+            close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
