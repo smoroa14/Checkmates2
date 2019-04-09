@@ -365,7 +365,7 @@ public class DeckGUI extends javax.swing.JFrame {
 
         }
         pbUnits.setValue(0);
-        unitpoints=0;
+        unitpoints = 0;
         for (int i = 0; i < deck.length; i++) {
             if (deck[i] != null) {
                 switch (deck[i]) {
@@ -398,14 +398,22 @@ public class DeckGUI extends javax.swing.JFrame {
                         break;
 
                     case "General":
-                        unitpoints += 2;
+                        unitpoints += 8;
                         break;
                 }
             }
 
         }
+        boolean hasking = false;
+        for (int i = 0; i < deck.length; i++) {
+            if (deck[i] != null) {
+                if (deck[i].equals("König")) {
+                    hasking = true;
+                }
+            }
+        }
         pbUnits.setValue(unitpoints);
-        if (unitpoints > pbUnits.getMaximum()) {
+        if (unitpoints > pbUnits.getMaximum() || hasking == false) {
             btSpeichern.setEnabled(false);
         } else {
             btSpeichern.setEnabled(true);
