@@ -29,8 +29,8 @@ public class Gluecksspieler extends Piece {
     
     public static List<Point> getMoves() {
 
-        if(pointss != null)return pointss;
-        
+        if(pointss != null && pointss.size() > 0)return pointss;
+        pointss = new LinkedList<>();
         List<Point> points = new LinkedList<>();
         
         int x = rand.nextInt(4);
