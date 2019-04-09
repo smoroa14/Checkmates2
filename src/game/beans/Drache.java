@@ -21,9 +21,9 @@ public class Drache extends Piece {
         super(steht_auf, color);
         
         if (getColor().equals("white")) {
-            this.icon = new ImageIcon("images/whitekonigin.png");
+            this.icon = new ImageIcon("images/whitedrache.png");
         } else if (getColor().equals("black")) {
-            this.icon = new ImageIcon("images/blackkonigin.png");
+            this.icon = new ImageIcon("images/blackdrache.png");
         }
     }
 
@@ -53,8 +53,29 @@ public class Drache extends Piece {
             }
         }
         
+        if (pos.x - 1 >= 0 && pos.y + 2 <= 7) {
+            if (steht_auf.getBoard().getSquare(pos.x - 1, pos.y + 2).getBesetzt_von() != null
+                    && !steht_auf.getBoard().getSquare(pos.x - 1, pos.y + 2).getBesetzt_von().getColor().equals(getColor())) {
+                moves.add(new Point(pos.x - 1, pos.y + 2));
+            }
+        }
+        //Atacke nach rechts
+        System.out.println(pos.x + " - " + pos.y);
+        if (pos.x + 1 <= 7 && pos.y + 2 <= 7) {
+            if (steht_auf.
+                    getBoard().
+                    getSquare(pos.x + 1, pos.y + 2).
+                    getBesetzt_von() != null
+                    && !steht_auf.getBoard().getSquare(pos.x + 1, pos.y + 2).getBesetzt_von().getColor().equals(getColor())) {
+                moves.add(new Point(pos.x + 1, pos.y + 2));
+            }
+        }
         
-        getVertUp(moves, pos, 2);
+        
+        getVertUp(moves, pos, 1);
+        getVertDown(moves, pos, 1);
+        getHorizLeft(moves, pos, 1);
+        getHorizRight(moves, pos, 1);
         
         
         pos.x = startx;

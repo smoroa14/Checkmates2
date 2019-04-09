@@ -159,6 +159,10 @@ public class Board extends JPanel {
                 case "Drache":
                     p = new Drache(chessBoard[x][y], color);
                     break;
+
+                case "General":
+                    p = new General(chessBoard[x][y], color);
+                    break;
             }
         } else if (enemydeck != null && (y == 7 && farbe.equals("black")) || (y == 0 && farbe.equals("white"))) {
             // gegners deck
@@ -194,6 +198,10 @@ public class Board extends JPanel {
 
                     case "Drache":
                         p = new Drache(chessBoard[x][y], color);
+                        break;
+
+                    case "General":
+                        p = new General(chessBoard[x][y], color);
                         break;
                 }
             } catch (Exception e) {
