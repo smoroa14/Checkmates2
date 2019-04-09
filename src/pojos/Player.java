@@ -33,14 +33,14 @@ public class Player implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String username;
-    private String password;
+    private int password;
     private Long mmr;
     private String[] deck = new String[8];
 
     public Player() {
     }
 
-    public Player(String username, String password, Long mmr, String[] deck) {
+    public Player(String username, int password, Long mmr, String[] deck) {
         this.username = username;
         this.password = password;
         this.mmr = mmr;
@@ -63,11 +63,11 @@ public class Player implements Serializable{
         this.username = username;
     }
 
-    public String getPassword() {
+    public int getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(int password) {
         this.password = password;
     }
 

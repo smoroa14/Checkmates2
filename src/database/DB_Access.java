@@ -59,7 +59,7 @@ public class DB_Access {
                         return false;
                     }
                 }
-                Player user = new Player(username, ""+getHashOfString(password1), 1000L, new String[]{"Turm", "Springer", "Läufer", "Dame", "König", "Läufer", "Springer", "Turm"});
+                Player user = new Player(username, getHashOfString(password1), 1000L, new String[]{"Turm", "Springer", "Läufer", "Dame", "König", "Läufer", "Springer", "Turm"});
                 em.getTransaction().begin();
                 em.persist(user);
                 em.getTransaction().commit();
@@ -76,7 +76,7 @@ public class DB_Access {
     public Player getUser(String username, String password) {
         TypedQuery<Player> user = em.createNamedQuery("Player.getPlayer", Player.class);
         user.setParameter("username", username);
-        user.setParameter("password", ""+getHashOfString(password));
+        user.setParameter("password", getHashOfString(password));
         List<Player> userList = user.getResultList();
         if (userList != null) {
             return userList.get(0);
