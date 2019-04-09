@@ -61,7 +61,6 @@ public class MenuGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -79,6 +78,7 @@ public class MenuGUI extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -88,19 +88,13 @@ public class MenuGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton4.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
-        jButton4.setText("Logout");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onLogout(evt);
-            }
-        });
-        getContentPane().add(jButton4, java.awt.BorderLayout.SOUTH);
-
+        jPanel8.setBackground(new java.awt.Color(0, 204, 204));
         jPanel8.setLayout(new java.awt.BorderLayout());
 
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
+        jPanel2.setOpaque(false);
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -117,6 +111,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, java.awt.BorderLayout.PAGE_END);
 
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.GridLayout(3, 2));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -144,6 +139,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2);
 
+        jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.BorderLayout());
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -172,12 +168,25 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jPanel8.add(jPanel1, java.awt.BorderLayout.CENTER);
 
+        jButton4.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
+        jButton4.setText("Logout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onLogout(evt);
+            }
+        });
+        jPanel8.add(jButton4, java.awt.BorderLayout.SOUTH);
+
         getContentPane().add(jPanel8, java.awt.BorderLayout.CENTER);
 
+        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Deck");
+        jButton5.setOpaque(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onDeck(evt);
@@ -185,21 +194,24 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         jPanel3.add(jButton5, java.awt.BorderLayout.EAST);
 
-        jPanel7.setOpaque(false);
+        jPanel7.setBackground(new java.awt.Color(0, 204, 204));
         jPanel7.setLayout(new java.awt.GridLayout(2, 1, 10, 10));
 
         lbName.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
+        lbName.setForeground(new java.awt.Color(0, 0, 0));
         lbName.setText("Name:");
         jPanel7.add(lbName);
 
         lbGeld.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
+        lbGeld.setForeground(new java.awt.Color(0, 0, 0));
         lbGeld.setText("Elo:");
         jPanel7.add(lbGeld);
 
         jPanel3.add(jPanel7, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setBackground(new java.awt.Color(0, 153, 153));
         jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Willkommen!");
         jLabel1.setOpaque(true);
