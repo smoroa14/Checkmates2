@@ -141,7 +141,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -151,6 +151,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb1" noResource="true"/>
@@ -203,7 +204,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -213,6 +214,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb2" noResource="true"/>
@@ -265,7 +267,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -275,6 +277,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb3" noResource="true"/>
@@ -327,7 +330,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -337,6 +340,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb4" noResource="true"/>
@@ -389,7 +393,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -399,6 +403,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb5" noResource="true"/>
@@ -451,7 +456,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -461,6 +466,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb6" noResource="true"/>
@@ -513,7 +519,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -523,6 +529,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb7" noResource="true"/>
@@ -575,7 +582,7 @@
                   <Font name="Tahoma" size="48" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="Bauer"/>
                     <StringItem index="1" value="L&#xe4;ufer"/>
                     <StringItem index="2" value="Dame"/>
@@ -585,6 +592,7 @@
                     <StringItem index="6" value="Agent"/>
                     <StringItem index="7" value="Drache"/>
                     <StringItem index="8" value="General"/>
+                    <StringItem index="9" value="Gl&#xfc;cksspieler"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="cb8" noResource="true"/>

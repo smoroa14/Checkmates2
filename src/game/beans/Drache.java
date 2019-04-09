@@ -42,7 +42,6 @@ public class Drache extends Piece {
             }
         }
         //Atacke nach rechts
-        System.out.println(pos.x + " - " + pos.y);
         if (pos.x + 1 <= 7 && pos.y - 2 >= 0) {
             if (steht_auf.
                     getBoard().
@@ -60,7 +59,6 @@ public class Drache extends Piece {
             }
         }
         //Atacke nach rechts
-        System.out.println(pos.x + " - " + pos.y);
         if (pos.x + 1 <= 7 && pos.y + 2 <= 7) {
             if (steht_auf.
                     getBoard().

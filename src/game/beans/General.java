@@ -13,9 +13,9 @@ public final class General extends Piece {
         super(occupying, color);
 
         if (getColor().equals("white")) {
-            this.icon = new ImageIcon("images/whitekonigin.png");
+            this.icon = new ImageIcon("images/whiteGeneral.png");
         } else if (getColor().equals("black")) {
-            this.icon = new ImageIcon("images/blackkonigin.png");
+            this.icon = new ImageIcon("images/blackGeneral.png");
         }
     }
 
@@ -123,7 +123,6 @@ public final class General extends Piece {
         }
 
         // 4. Reihe -------------------------------
-        System.out.println(pos.x + " - " + pos.y);
         if (pos.x - 2 >= 0 && pos.y + 1 <= 7) {
             if (steht_auf.
                     getBoard().
@@ -135,7 +134,6 @@ public final class General extends Piece {
         }
 
         //Atacke nach rechts
-        System.out.println(pos.x + " - " + pos.y);
         if (pos.x + 2 >= 0 && pos.y + 1 <= 7) {
             if (steht_auf.
                     getBoard().

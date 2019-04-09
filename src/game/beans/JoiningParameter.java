@@ -5,7 +5,9 @@
  */
 package game.beans;
 
+import java.awt.Point;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -14,7 +16,13 @@ import java.io.Serializable;
 public class JoiningParameter implements Serializable{
     private String password;
     private String[] deck;
+    private List<Point> points;
 
+    public JoiningParameter(String password, String[] deck, List<Point> points) {
+        this.password = password;
+        this.deck = deck;
+        this.points = points;
+    }
     public JoiningParameter(String password, String[] deck) {
         this.password = password;
         this.deck = deck;
@@ -35,6 +43,16 @@ public class JoiningParameter implements Serializable{
     public void setDeck(String[] deck) {
         this.deck = deck;
     }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+    
     
     
 }

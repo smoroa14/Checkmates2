@@ -2,6 +2,7 @@ package game.GUI;
 
 import bl.CurrentUser;
 import database.DB_Access;
+import game.beans.Gluecksspieler;
 import game.beans.JoiningParameter;
 import game.beans.Message;
 import game.beans.Packet;
@@ -56,6 +57,7 @@ public class Server extends Connectable {
                             } else {
                                 System.out.println("Game starting!");
                                 String[] arr = params.getDeck();
+                                Gluecksspieler.setMoves(params.getPoints());
                                 System.out.println("Server: von client");
                                 for (String string : arr) {
                                     System.out.print(string + ", ");

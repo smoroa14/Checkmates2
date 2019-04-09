@@ -110,12 +110,12 @@ public class Board extends JPanel {
 //                }
                 chessBoard[x][y].setBesetzt_von(p);
                 add(chessBoard[x][y]);
-                
+
                 this.repaint();
             }
         }
         for (Component component : getComponents()) {
-            System.out.println(((Square)component).getIcon());
+            System.out.println(((Square) component).getIcon());
             component.repaint();
         }
     }
@@ -163,6 +163,10 @@ public class Board extends JPanel {
                 case "General":
                     p = new General(chessBoard[x][y], color);
                     break;
+                    
+                case "Glücksspieler":
+                    p = new Gluecksspieler(chessBoard[x][y], color);
+                    break;
             }
         } else if (enemydeck != null && (y == 7 && farbe.equals("black")) || (y == 0 && farbe.equals("white"))) {
             // gegners deck
@@ -202,6 +206,10 @@ public class Board extends JPanel {
 
                     case "General":
                         p = new General(chessBoard[x][y], color);
+                        break;
+
+                    case "Glücksspieler":
+                        p = new Gluecksspieler(chessBoard[x][y], color);
                         break;
                 }
             } catch (Exception e) {

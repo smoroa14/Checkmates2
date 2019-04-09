@@ -2,6 +2,7 @@ package game.GUI;
 
 import bl.CurrentUser;
 import database.DB_Access;
+import game.beans.Gluecksspieler;
 import game.beans.JoiningParameter;
 import game.beans.Message;
 import game.beans.Packet;
@@ -33,7 +34,7 @@ public class Client extends Connectable {
             out = new ObjectOutputStream(socket.getOutputStream());
             String pw = CurrentUser.password;
             String[] deck = DB_Access.getInstance().loadDeck(CurrentUser.player.getUsername());
-            out.writeObject(new JoiningParameter(pw, deck));
+            out.writeObject(new JoiningParameter(pw, deck, Gluecksspieler.getMoves()));
             out.flush();
             in = new ObjectInputStream(socket.getInputStream());
             do {
