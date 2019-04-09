@@ -46,7 +46,7 @@ public class Server extends Connectable {
                     try {
                         packet = (Packet) o;
                         handlePacket(packet);
-                    } catch (Exception e) {
+                    } catch (ClassCastException e) {
                         try {
                             JoiningParameter params = (JoiningParameter) o;
                             if (!params.getPassword().equals(CurrentUser.password)) {
